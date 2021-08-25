@@ -1,0 +1,136 @@
+<div class="container text-center">
+  <h1 class="display-4" id="titulo">COTIZADOR CPS</h1>
+</div>
+
+<div class="container">
+  <form [formGroup]="cotizadorForm" (ngSubmit)="onCotizar(cotizadorForm.value)">
+    <div class="form-group">
+      <label for="inputOrigen">ORIGEN</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputOrigen"
+        placeholder="Ciudad de Guatemala, Guatemala"
+        disabled="true"
+        required
+      />
+    </div>
+    <label for="">DESTINO</label>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputRegion">Región</label>
+        <select
+          id="inputRegion"
+          class="form-control"
+          formControlName="pais"
+          (ngModelChange)="onSelectPais($event)"
+        >
+          <option *ngFor="let pais of paises" value="{{ pais.idPais }}">
+            {{ pais.pais }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPais">País</label>
+        <select
+          id="inputPais"
+          class="form-control"
+          formControlName="region"
+          (ngModelChange)="onSelectTarifa($event)"
+        >
+          <option *ngFor="let region of regiones" value="{{ region.tarifa }}">
+            {{ region.region }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <label for="">DIMENSIONES</label>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputPeso">Peso</label>
+        <input
+          type="number"
+          class="form-control"
+          id="inputPeso"
+          placeholder=""
+          formControlName="peso"
+          name="peso"
+          [(ngModel)]="peso"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputAncho">Ancho</label>
+        <input
+          type="number"
+          class="form-control"
+          id="inputAncho"
+          placeholder=""
+          formControlName="ancho"
+          name="ancho"
+          [(ngModel)]="ancho"
+        />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputLargo">Largo</label>
+        <input
+          type="number"
+          class="form-control"
+          id="inputLargo"
+          placeholder=""
+          formControlName="largo"
+          name="largo"
+          [(ngModel)]="largo"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputAlto">Alto</label>
+        <input
+          type="number"
+          class="form-control"
+          id="inputAlto"
+          placeholder=""
+          formControlName="alto"
+          name="alto"
+          [(ngModel)]="alto"
+        />
+      </div>
+    </div>
+    <label for="inputCodigo">Código de Cliente (opcional)</label>
+    <div class="form-row">
+      <div class="form-group col-xm-5">
+        <input
+          type="number"
+          class="form-control"
+          id="inputDesc"
+          placeholder=""
+          formControlName="codigo"
+          [(ngModel)]="codigo"
+        />
+      </div>
+      <div class="form-group col-xm-5">
+        <input
+          type="button"
+          class="btn btn-primary"
+          value="Validar Código"
+          (click)="onValCodigo()"
+        />
+      </div>
+      <div class="form-group col-xm-2 text-left" style="margin-top: 6px">
+        <span>({{ descTipoCliente }})</span>
+      </div>
+    </div>
+    <input
+      type="submit"
+      class="btn btn-success btn-lg btn-block"
+      value="Cotizar"
+    />
+  </form>
+</div>
+<br />
+<div class="container text-center">
+  <h4>Estimado:</h4>
+  <h5>{{ estimado }}</h5>
+  <br /><br />
+</div>
